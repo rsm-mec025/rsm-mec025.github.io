@@ -1,0 +1,25 @@
+project:
+  type: website
+  output-dir: docs
+  
+extensions: [jmgirard/embedpdf]
+
+website:
+  title: "Mengxing's Website"
+  navbar:
+    left:
+      - href: index.qmd
+        text: About
+      - href: resume.qmd
+        text: Resume
+      - href: blog.qmd
+        text: Projects
+
+format:
+  html:
+    theme: cosmo
+    css: styles.css
+    toc: true
+
+
+
