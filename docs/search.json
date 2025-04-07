@@ -1,17 +1,10 @@
 [
   {
-    "objectID": "index.html",
-    "href": "index.html",
-    "title": "Mengxing (Sienna) Chen",
+    "objectID": "blog.html",
+    "href": "blog.html",
+    "title": "My Projects",
     "section": "",
-    "text": "Here is a paragraph about me!\nHi! I’m a Master of Business Analytics student at UCSD Rady School of Management with a strong foundation in marketing and a growing expertise in data Analytics. Before grad school, I worked in brand marketing and franchise management roles, where I developed a passion for combining strategy, creativity, and consumer insight. Now, I’m deepening my technical skills in Python, SQL, and predictive modeling, with a keen interest in how analytics can power smarter marketing decisions. I’m actively involved in Rady’s Consulting and Data Analytics Clubs, and outside of class, I enjoy dancing, traveling, and trying new things that keep life exciting and full of growth."
-  },
-  {
-    "objectID": "resume.html",
-    "href": "resume.html",
-    "title": "Resume",
-    "section": "",
-    "text": "Download PDF file."
+    "text": "This is Project 1\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nThis is Project 1\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nNo matching items"
   },
   {
     "objectID": "blog/project1/index.html",
@@ -35,11 +28,18 @@
     "text": "Section 2: Analysis\nI analyzed the data.\n#| message: false library(tidyverse) ggplot(mtcars, aes(x = wt, y = mpg)) + geom_point()"
   },
   {
-    "objectID": "blog.html",
-    "href": "blog.html",
-    "title": "My Projects",
+    "objectID": "resume.html",
+    "href": "resume.html",
+    "title": "Resume",
     "section": "",
-    "text": "This is Project 1\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nThis is Project 1\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nNo matching items"
+    "text": "Download PDF file."
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Mengxing (Sienna) Chen",
+    "section": "",
+    "text": "Here is a paragraph about me!\nHi! I’m a Master of Business Analytics student at UCSD Rady School of Management with a strong foundation in marketing and a growing expertise in data Analytics. Before grad school, I worked in brand marketing and franchise management roles, where I developed a passion for combining strategy, creativity, and consumer insight. Now, I’m deepening my technical skills in Python, SQL, and predictive modeling, with a keen interest in how analytics can power smarter marketing decisions. I’m actively involved in Rady’s Consulting and Data Analytics Clubs, and outside of class, I enjoy dancing, traveling, and trying new things that keep life exciting and full of growth."
   },
   {
     "objectID": "blog/project2/index.html",
