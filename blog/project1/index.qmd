@@ -10,6 +10,8 @@ I analyzed the data.
 
 ```{r}
 #| message: false
+
 library(tidyverse)
 ggplot(mtcars, aes(x = wt, y = mpg)) +
   geom_point()
+```
