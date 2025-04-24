@@ -8,7 +8,7 @@ execute:
   echo: true
   eval: true
   python: /opt/conda/bin/python
-  
+
 callout-appearance: minimal # this hides the blue "i" icon on .callout-notes
 ---
 
@@ -34,7 +34,7 @@ karlan_list_2007.dta
 import pandas as pd
 df = pd.read_stata("karlan_list_2007.dta")
 df.info()
-df.head()
+print(df.head())
 df[['treatment', 'control', 'gave', 'amount',
     'ratio2', 'ratio3',
     'size25', 'size50', 'size100', 'sizeno',
@@ -269,6 +269,8 @@ These results align with Table 3 in the original paper and reinforce the behavio
 
 Next, I assess the effectiveness of different sizes of matched donations on the response rate.
 
+The t-tests comparing the donation rates across different match ratios yielded the following results:
+
 ```{python}
 from scipy.stats import ttest_ind
 
@@ -288,12 +290,6 @@ print(f"1:1 vs 3:1 → t = {t2:.3f}, p = {p2:.3f}")
 t3, p3 = ttest_ind(ratio_2_1, ratio_3_1, equal_var=False)
 print(f"2:1 vs 3:1 → t = {t3:.3f}, p = {p3:.3f}")
 ```
-
-The t-tests comparing the donation rates across different match ratios yielded the following results:
-
-- 1:1 vs 2:1 → p = 0.335
-- 1:1 vs 3:1 → p = 0.310
-- 2:1 vs 3:1 → p = 0.960
 
 All p-values are well above 0.05, indicating that the differences in response rates between these match ratios are **not statistically significant**.
 
