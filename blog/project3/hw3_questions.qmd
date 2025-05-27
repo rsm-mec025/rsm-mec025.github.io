@@ -1,8 +1,8 @@
 ---
 title: "Multinomial Logit Model"
 author: "Mengxing Chen"
-date: today
-format: pdf
+date: 2025-5-26
+format: html
 ---
 
 

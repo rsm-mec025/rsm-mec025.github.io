@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Mengxing Chen">
-<meta name="dcterms.date" content="2025-05-07">
+<meta name="dcterms.date" content="2025-05-21">
 
 <title>Poisson Regression Examples – Mengxing’s Website</title>
 <style>
@@ -221,7 +221,7 @@ window.Quarto = {
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">May 7, 2025</p>
+      <p class="date">May 21, 2025</p>
     </div>
   </div>
   
@@ -242,7 +242,7 @@ window.Quarto = {
 </section>
 <section id="data" class="level3">
 <h3 class="anchored" data-anchor-id="data">Data</h3>
-<div id="64f49578" class="cell" data-execution_count="1">
+<div id="62c0a8a1" class="cell" data-execution_count="1">
 <div class="cell-output cell-output-display" data-execution_count="1">
 <div>
 
@@ -299,7 +299,7 @@ window.Quarto = {
 </div>
 </div>
 </div>
-<div id="c268db60" class="cell" data-execution_count="2">
+<div id="c6c61152" class="cell" data-execution_count="2">
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
@@ -308,7 +308,7 @@ window.Quarto = {
 </div>
 </div>
 </div>
-<div id="6afbd572" class="cell" data-execution_count="3">
+<div id="c3d4c158" class="cell" data-execution_count="3">
 <div class="cell-output cell-output-display" data-execution_count="3">
 <div>
 
@@ -355,7 +355,7 @@ window.Quarto = {
 <li>However, this is a descriptive comparison. Further modeling is needed to determine whether the customer status is <strong>causally associated</strong> with higher patent counts, or if it’s confounded by other variables such as region or firm age.</li>
 </ul>
 <p>Blueprinty customers are not selected at random. It may be important to account for systematic differences in the age and regional location of customers vs non-customers.</p>
-<div id="0bb57764" class="cell" data-execution_count="4">
+<div id="c325b025" class="cell" data-execution_count="4">
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
@@ -364,7 +364,7 @@ window.Quarto = {
 </div>
 </div>
 </div>
-<div id="0932d702" class="cell" data-execution_count="5">
+<div id="4bf6317c" class="cell" data-execution_count="5">
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
@@ -373,7 +373,7 @@ window.Quarto = {
 </div>
 </div>
 </div>
-<div id="446aeb86" class="cell" data-execution_count="6">
+<div id="6566489f" class="cell" data-execution_count="6">
 <div class="cell-output cell-output-display" data-execution_count="6">
 <div>
 
@@ -454,7 +454,7 @@ window.Quarto = {
 <p>[ L(Y_1, , Y_n) = _{i=1}^{n} ]</p>
 <p>Taking the natural log gives the log-likelihood:</p>
 <p>[ L() = -n+ () <em>{i=1}^{n} Y_i - </em>{i=1}^{n} (Y_i!) ]</p>
-<div id="1bc47123" class="cell" data-execution_count="7">
+<div id="11d494e0" class="cell" data-execution_count="7">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> scipy.special <span class="im">import</span> gammaln  <span class="co"># for log-factorial</span></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -471,7 +471,7 @@ window.Quarto = {
 <pre><code>-3374.866063195544</code></pre>
 </div>
 </div>
-<div id="97a4d6d3" class="cell" data-execution_count="8">
+<div id="e46de7ce" class="cell" data-execution_count="8">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> scipy.optimize <span class="im">import</span> minimize</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Negative log-likelihood (since we minimize)</span></span>
@@ -489,7 +489,7 @@ window.Quarto = {
 <pre><code>3.6846666675617414</code></pre>
 </div>
 </div>
-<div id="c658ef3c" class="cell" data-execution_count="9">
+<div id="3f3964cf" class="cell" data-execution_count="9">
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
@@ -505,7 +505,7 @@ window.Quarto = {
 <li>The red dashed line marks the location of the MLE, clearly aligning with the global maximum of the log-likelihood function.</li>
 <li>This plot visually confirms that (= 3.68) is the value that best fits the data under a Poisson model.</li>
 </ul>
-<div id="f451c8d0" class="cell" data-execution_count="10">
+<div id="2d035798" class="cell" data-execution_count="10">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> statsmodels.api <span class="im">as</span> sm</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Response variable</span></span>
@@ -557,13 +557,13 @@ window.Quarto = {
 </tr>
 <tr class="even">
 <td data-quarto-table-cell-role="th">Date:</td>
-<td>Wed, 07 May 2025</td>
+<td>Mon, 26 May 2025</td>
 <td data-quarto-table-cell-role="th">Deviance:</td>
 <td>2362.5</td>
 </tr>
 <tr class="odd">
 <td data-quarto-table-cell-role="th">Time:</td>
-<td>01:11:21</td>
+<td>17:55:06</td>
 <td data-quarto-table-cell-role="th">Pearson chi2:</td>
 <td>2.25e+03</td>
 </tr>
@@ -618,7 +618,7 @@ window.Quarto = {
 <section id="estimation-of-poisson-regression-model" class="level3">
 <h3 class="anchored" data-anchor-id="estimation-of-poisson-regression-model">Estimation of Poisson Regression Model</h3>
 <p>Next, we extend our simple Poisson model to a Poisson Regression Model such that <span class="math inline">\(Y_i = \text{Poisson}(\lambda_i)\)</span> where <span class="math inline">\(\lambda_i = \exp(X_i'\beta)\)</span>. The interpretation is that the success rate of patent awards is not constant across all firms (<span class="math inline">\(\lambda\)</span>) but rather is a function of firm characteristics <span class="math inline">\(X_i\)</span>. Specifically, we will use the covariates age, age squared, region, and whether the firm is a customer of Blueprinty.</p>
-<div id="9fe68cea" class="cell" data-execution_count="11">
+<div id="ce5ead62" class="cell" data-execution_count="11">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> poisson_regression_log_likelihood(beta, Y, X):</span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>    beta <span class="op">=</span> np.asarray(beta, dtype<span class="op">=</span>np.float64).reshape(<span class="op">-</span><span class="dv">1</span>)  <span class="co"># Force float64 1D</span></span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>    X <span class="op">=</span> np.asarray(X, dtype<span class="op">=</span>np.float64)</span>
@@ -629,7 +629,7 @@ window.Quarto = {
 <span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> np.<span class="bu">sum</span>(Y <span class="op">*</span> np.log(lambd) <span class="op">-</span> lambd <span class="op">-</span> gammaln(Y <span class="op">+</span> <span class="dv">1</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="92f292ae" class="cell" data-execution_count="12">
+<div id="509b7f86" class="cell" data-execution_count="12">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create age squared</span></span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>blueprinty[<span class="st">"age_sq"</span>] <span class="op">=</span> blueprinty[<span class="st">"age"</span>] <span class="op">**</span> <span class="dv">2</span></span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -647,7 +647,7 @@ window.Quarto = {
 <span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a>X_np <span class="op">=</span> X.to_numpy()</span>
 <span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a>Y_np <span class="op">=</span> blueprinty[<span class="st">"patents"</span>].to_numpy()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="8fb29b32" class="cell" data-execution_count="13">
+<div id="79fd4ad2" class="cell" data-execution_count="13">
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Rebuild X with full control to prevent dtype issues</span></span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>X_clean <span class="op">=</span> pd.concat([</span>
 <span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>    pd.Series(<span class="fl">1.0</span>, index<span class="op">=</span>blueprinty.index, name<span class="op">=</span><span class="st">"intercept"</span>),  <span class="co"># intercept as float</span></span>
@@ -658,7 +658,7 @@ window.Quarto = {
 <span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>X_np <span class="op">=</span> X_clean.to_numpy(dtype<span class="op">=</span>np.float64)  <span class="co"># fully numeric</span></span>
 <span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>Y_np <span class="op">=</span> blueprinty[<span class="st">"patents"</span>].astype(<span class="bu">float</span>).to_numpy()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="e261e9fe" class="cell" data-execution_count="14">
+<div id="86458ed0" class="cell" data-execution_count="14">
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.preprocessing <span class="im">import</span> StandardScaler</span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Negative log-likelihood for use in optimizer</span></span>
 <span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> neg_poisson_regression_log_likelihood(beta, Y, X):</span>
@@ -684,7 +684,7 @@ window.Quarto = {
        -0.01860087,  0.05259177,  0.06118601])</code></pre>
 </div>
 </div>
-<div id="2a54afb5" class="cell" data-execution_count="15">
+<div id="42d82f37" class="cell" data-execution_count="15">
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Get variance-covariance matrix (inverse Hessian approximation)</span></span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>vcov_matrix <span class="op">=</span> result.hess_inv</span>
 <span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -767,7 +767,7 @@ window.Quarto = {
 </div>
 </div>
 </div>
-<div id="dc5f5109" class="cell" data-execution_count="16">
+<div id="e62ae68f" class="cell" data-execution_count="16">
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> statsmodels.api <span class="im">as</span> sm</span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Fit Poisson GLM</span></span>
@@ -812,13 +812,13 @@ window.Quarto = {
 </tr>
 <tr class="even">
 <td data-quarto-table-cell-role="th">Date:</td>
-<td>Wed, 07 May 2025</td>
+<td>Mon, 26 May 2025</td>
 <td data-quarto-table-cell-role="th">Deviance:</td>
 <td>2143.3</td>
 </tr>
 <tr class="odd">
 <td data-quarto-table-cell-role="th">Time:</td>
-<td>01:11:21</td>
+<td>17:55:06</td>
 <td data-quarto-table-cell-role="th">Pearson chi2:</td>
 <td>2.07e+03</td>
 </tr>
@@ -1021,7 +1021,7 @@ window.Quarto = {
 <blockquote class="blockquote">
 <p>Overall, this validates both modeling approaches and reinforces the interpretation that Blueprinty use is associated with a meaningful increase in patent output.</p>
 </blockquote>
-<div id="bdec3b2c" class="cell" data-execution_count="17">
+<div id="a192100f" class="cell" data-execution_count="17">
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create X_0 and X_1 from the original X_clean</span></span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>X_0 <span class="op">=</span> X_clean.copy()</span>
 <span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>X_0[<span class="st">"iscustomer"</span>] <span class="op">=</span> <span class="dv">0</span></span>
@@ -1090,7 +1090,7 @@ Variable Definitions
 </div>
 </div>
 </div>
-<div id="14a32eea" class="cell" data-execution_count="18">
+<div id="68a43d02" class="cell" data-execution_count="18">
 <div class="cell-output cell-output-display" data-execution_count="18">
 <div>
 
@@ -1207,7 +1207,7 @@ Variable Definitions
 </div>
 </div>
 </div>
-<div id="f68924b0" class="cell" data-execution_count="19">
+<div id="ea1bdf3b" class="cell" data-execution_count="19">
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>airbnb[<span class="st">"last_scraped"</span>] <span class="op">=</span> pd.to_datetime(airbnb[<span class="st">"last_scraped"</span>])</span>
 <span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>airbnb[<span class="st">"host_since"</span>] <span class="op">=</span> pd.to_datetime(airbnb[<span class="st">"host_since"</span>])</span>
 <span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>airbnb[<span class="st">"days"</span>] <span class="op">=</span> (airbnb[<span class="st">"last_scraped"</span>] <span class="op">-</span> airbnb[<span class="st">"host_since"</span>]).dt.days</span>
@@ -1221,7 +1221,7 @@ Variable Definitions
 <span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb16-12"><a href="#cb16-12" aria-hidden="true" tabindex="-1"></a>airbnb_clean <span class="op">=</span> airbnb[columns_needed].dropna()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="2a5da7f7" class="cell" data-execution_count="20">
+<div id="c65943d5" class="cell" data-execution_count="20">
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
@@ -1244,7 +1244,7 @@ Variable Definitions
 <li>When broken down by room type, all categories show similar medians and a large number of outliers.</li>
 <li>This suggests room type may influence variability in bookings but is not the sole driver.</li>
 </ul>
-<div id="69240667" class="cell" data-execution_count="21">
+<div id="34857569" class="cell" data-execution_count="21">
 <div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># One-hot encode room_type (drop one category as baseline)</span></span>
 <span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>room_dummies <span class="op">=</span> pd.get_dummies(airbnb_clean[<span class="st">"room_type"</span>], drop_first<span class="op">=</span><span class="va">True</span>)</span>
 <span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -1265,7 +1265,7 @@ Variable Definitions
 <span id="cb17-18"><a href="#cb17-18" aria-hidden="true" tabindex="-1"></a><span class="co"># Response variable</span></span>
 <span id="cb17-19"><a href="#cb17-19" aria-hidden="true" tabindex="-1"></a>Y_model <span class="op">=</span> airbnb_clean[<span class="st">"number_of_reviews"</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="22f83eea" class="cell" data-execution_count="22">
+<div id="646e4e45" class="cell" data-execution_count="22">
 <div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> statsmodels.api <span class="im">as</span> sm</span>
 <span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Force all columns to be float64 to prevent type errors</span></span>
@@ -1318,13 +1318,13 @@ Variable Definitions
 </tr>
 <tr class="even">
 <td data-quarto-table-cell-role="th">Date:</td>
-<td>Wed, 07 May 2025</td>
+<td>Mon, 26 May 2025</td>
 <td data-quarto-table-cell-role="th">Deviance:</td>
 <td>8.5945e+05</td>
 </tr>
 <tr class="odd">
 <td data-quarto-table-cell-role="th">Time:</td>
-<td>01:11:21</td>
+<td>17:55:07</td>
 <td data-quarto-table-cell-role="th">Pearson chi2:</td>
 <td>1.18e+06</td>
 </tr>

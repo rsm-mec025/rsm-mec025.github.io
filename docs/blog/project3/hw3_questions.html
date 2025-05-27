@@ -192,7 +192,7 @@ window.Quarto = {
   <li><a href="#discussion" id="toc-discussion" class="nav-link" data-scroll-target="#discussion">6. Discussion</a></li>
   <li><a href="#conclusion" id="toc-conclusion" class="nav-link" data-scroll-target="#conclusion">Conclusion</a></li>
   </ul>
-<div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="hw3_questions.pdf"><i class="bi bi-file-pdf"></i>PDF</a></li></ul></div></nav>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -270,7 +270,7 @@ Note
 </div>
 <div id="callout-1" class="callout-1-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<div id="507bd7d3" class="cell" data-execution_count="1">
+<div id="5ca279fd" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> itertools</span>
@@ -410,7 +410,7 @@ Note
 <section id="preparing-the-data-for-estimation" class="level2">
 <h2 class="anchored" data-anchor-id="preparing-the-data-for-estimation">3. Preparing the Data for Estimation</h2>
 <p>The “hard part” of the MNL likelihood function is organizing the data, as we need to keep track of 3 dimensions (consumer <span class="math inline">\(i\)</span>, covariate <span class="math inline">\(k\)</span>, and product <span class="math inline">\(j\)</span>) instead of the typical 2 dimensions for cross-sectional regression models (consumer <span class="math inline">\(i\)</span> and covariate <span class="math inline">\(k\)</span>). The fact that each task for each respondent has the same number of alternatives (3) helps. In addition, we need to convert the categorical variables for brand and ads into binary variables.</p>
-<div id="f102c5c7" class="cell" data-execution_count="2">
+<div id="b7feca2b" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Convert categorical variables into binary indicators</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>conjoint_data[<span class="st">'Netflix'</span>] <span class="op">=</span> (conjoint_data[<span class="st">'brand'</span>] <span class="op">==</span> <span class="st">'N'</span>).astype(<span class="bu">int</span>)</span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>conjoint_data[<span class="st">'Prime'</span>] <span class="op">=</span> (conjoint_data[<span class="st">'brand'</span>] <span class="op">==</span> <span class="st">'P'</span>).astype(<span class="bu">int</span>)</span>
@@ -443,7 +443,7 @@ Columns: ['resp', 'task', 'brand', 'ad', 'price', 'choice', 'Netflix', 'Prime', 
 </section>
 <section id="estimation-via-maximum-likelihood" class="level2">
 <h2 class="anchored" data-anchor-id="estimation-via-maximum-likelihood">4. Estimation via Maximum Likelihood</h2>
-<div id="13aa0d17" class="cell" data-execution_count="3">
+<div id="0760949b" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> scipy.optimize <span class="im">import</span> minimize</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Extract design matrix X and response y</span></span>
@@ -510,7 +510,7 @@ Columns: ['resp', 'task', 'brand', 'ad', 'price', 'choice', 'Netflix', 'Prime', 
 </section>
 <section id="estimation-via-bayesian-methods" class="level2">
 <h2 class="anchored" data-anchor-id="estimation-via-bayesian-methods">5. Estimation via Bayesian Methods</h2>
-<div id="3ba01030" class="cell" data-execution_count="4">
+<div id="6bf34706" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Reuse earlier data and log-likelihood setup</span></span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>X <span class="op">=</span> conjoint_data[[<span class="st">'Netflix'</span>, <span class="st">'Prime'</span>, <span class="st">'Ad'</span>, <span class="st">'price'</span>]].values</span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> conjoint_data[<span class="st">'choice'</span>].values</span>
@@ -587,7 +587,7 @@ Columns: ['resp', 'task', 'brand', 'ad', 'price', 'choice', 'Netflix', 'Prime', 
 <p>The Bayesian posterior means are very close to the MLE point estimates.</p>
 <p>The Bayesian credible intervals slightly differ in width and location — that’s expected due to prior influence and how uncertainty is measured in Bayesian methods.</p>
 <p>All intervals are overlapping, which shows strong agreement between frequentist and Bayesian approaches.</p>
-<div id="74de7527" class="cell" data-execution_count="5">
+<div id="cb6df64a" class="cell" data-execution_count="5">
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
@@ -650,7 +650,7 @@ Columns: ['resp', 'task', 'brand', 'ad', 'price', 'choice', 'Netflix', 'Prime', 
 </tr>
 </tbody>
 </table>
-<div id="99de2a59" class="cell" data-execution_count="6">
+<div id="ab217936" class="cell" data-execution_count="6">
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
