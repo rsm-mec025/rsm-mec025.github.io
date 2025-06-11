@@ -1,5 +1,5 @@
 ---
-title: "Add Title"
+title: "Unsupervised and Supervised ML in Action: K-Means Clustering and KNN Classification"
 author: "Mengxing Chen"
 date: 2025-6-10
 format: html
