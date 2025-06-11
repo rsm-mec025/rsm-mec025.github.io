@@ -215,7 +215,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li><code>flipper_length_mm</code>: Length of the flipper (millimeters)</li>
 </ul>
 <p>These features will be used to cluster penguins into natural groups via the <strong>K-Means</strong> algorithm.</p>
-<div id="ed873913" class="cell" data-execution_count="1">
+<div id="2445f2a1" class="cell" data-execution_count="1">
 <div class="cell-output cell-output-stdout">
 <pre><code>   bill_length_mm  flipper_length_mm
 0            39.1                181
@@ -246,7 +246,7 @@ max         59.600000         231.000000</code></pre>
 </section>
 <section id="implementing-k-means-from-scratch" class="level3">
 <h3 class="anchored" data-anchor-id="implementing-k-means-from-scratch">⚙️ Implementing K-Means from Scratch</h3>
-<div id="e9a022b2" class="cell" data-execution_count="2">
+<div id="b569dfd2" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> initialize_centroids(X, k):</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    np.random.seed(<span class="dv">42</span>)</span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> X[np.random.choice(X.shape[<span class="dv">0</span>], k, replace<span class="op">=</span><span class="va">False</span>)]</span>
@@ -275,7 +275,7 @@ max         59.600000         231.000000</code></pre>
 </section>
 <section id="elbow-method-wcss-vs-k" class="level3">
 <h3 class="anchored" data-anchor-id="elbow-method-wcss-vs-k">📉 Elbow Method: WCSS vs K</h3>
-<div id="141de761" class="cell" data-execution_count="3">
+<div id="525a621b" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>wcss_list <span class="op">=</span> []</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>k_range <span class="op">=</span> <span class="bu">range</span>(<span class="dv">2</span>, <span class="dv">8</span>)</span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -308,7 +308,7 @@ max         59.600000         231.000000</code></pre>
 </section>
 <section id="silhouette-analysis" class="level3">
 <h3 class="anchored" data-anchor-id="silhouette-analysis">🧮 Silhouette Analysis</h3>
-<div id="a9b6c4ca" class="cell" data-execution_count="4">
+<div id="c8d37d5c" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.metrics <span class="im">import</span> silhouette_score</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>silhouette_scores <span class="op">=</span> []</span>
@@ -343,7 +343,7 @@ max         59.600000         231.000000</code></pre>
 </section>
 <section id="comparison-with-built-in-kmeans" class="level3">
 <h3 class="anchored" data-anchor-id="comparison-with-built-in-kmeans">Comparison with Built-In KMeans</h3>
-<div id="91ae7bf5" class="cell" data-execution_count="5">
+<div id="28ccd1d3" class="cell" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.cluster <span class="im">import</span> KMeans</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>k <span class="op">=</span> <span class="dv">3</span>  <span class="co"># Example: set based on elbow/silhouette</span></span>
@@ -382,7 +382,7 @@ max         59.600000         231.000000</code></pre>
 <p>In this section, we implement the <strong>K-Nearest Neighbors (KNN)</strong> classification algorithm from scratch using a <strong>synthetic dataset</strong>. The dataset includes two features, <code>x1</code> and <code>x2</code>, and a binary target variable <code>y</code> determined by whether <code>x2</code> is above or below a <strong>wiggly non-linear boundary</strong> defined by a sine function. We evaluate KNN performance across multiple values of <code>k</code> to identify the optimal neighborhood size.</p>
 <section id="generate-training-data" class="level3">
 <h3 class="anchored" data-anchor-id="generate-training-data">📊 Generate Training Data</h3>
-<div id="47036d06" class="cell" data-execution_count="6">
+<div id="9e153dcc" class="cell" data-execution_count="6">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
@@ -397,7 +397,7 @@ max         59.600000         231.000000</code></pre>
 <span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>X_train <span class="op">=</span> np.column_stack((x1, x2))</span>
 <span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>y_train <span class="op">=</span> y</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="af59aa21" class="cell" data-execution_count="7">
+<div id="1367b950" class="cell" data-execution_count="7">
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
@@ -416,7 +416,7 @@ max         59.600000         231.000000</code></pre>
 </section>
 <section id="generate-test-data" class="level3">
 <h3 class="anchored" data-anchor-id="generate-test-data">🧪 Generate Test Data</h3>
-<div id="7ccb6098" class="cell" data-execution_count="8">
+<div id="acca1f5e" class="cell" data-execution_count="8">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>np.random.seed(<span class="dv">7</span>)</span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>x1_test <span class="op">=</span> np.random.uniform(<span class="op">-</span><span class="dv">3</span>, <span class="dv">3</span>, n)</span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>x2_test <span class="op">=</span> np.random.uniform(<span class="op">-</span><span class="dv">3</span>, <span class="dv">3</span>, n)</span>
@@ -428,7 +428,7 @@ max         59.600000         231.000000</code></pre>
 </section>
 <section id="manual-knn-implementation" class="level3">
 <h3 class="anchored" data-anchor-id="manual-knn-implementation">🧮Manual KNN Implementation</h3>
-<div id="c9391af3" class="cell" data-execution_count="9">
+<div id="334647b3" class="cell" data-execution_count="9">
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> collections <span class="im">import</span> Counter</span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> euclidean_distance(a, b):</span>
@@ -447,7 +447,7 @@ max         59.600000         231.000000</code></pre>
 </section>
 <section id="accuracy-vs.-k-plot" class="level3">
 <h3 class="anchored" data-anchor-id="accuracy-vs.-k-plot">📈 Accuracy vs.&nbsp;K Plot</h3>
-<div id="f5b17462" class="cell" data-execution_count="10">
+<div id="dc47616f" class="cell" data-execution_count="10">
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.metrics <span class="im">import</span> accuracy_score</span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>accuracies <span class="op">=</span> []</span>
