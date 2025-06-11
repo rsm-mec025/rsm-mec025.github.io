@@ -26,5 +26,11 @@
   "blog/project3/hw3_questions.qmd": {
     "hw3_questions.tex": "b0d07090",
     "hw3_questions.html": "4c56e11d"
+  },
+  "class_exersice.ipynb": {
+    "class_exersice.html": "c09470c0"
+  },
+  "blog/project4/hw4_questions.qmd": {
+    "hw4_questions.html": "9ee14daf"
   }
 }

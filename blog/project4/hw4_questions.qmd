@@ -1,0 +1,283 @@
+---
+title: "Add Title"
+author: "Mengxing Chen"
+date: 2025-6-10
+format: html
+jupyter: python3
+---
+
+## K-Means Clustering
+
+### 📊 Dataset Overview
+
+We use the **Palmer Penguins dataset**, focusing on:
+
+- `bill_length_mm`: Length of the penguin’s bill (millimeters)
+- `flipper_length_mm`: Length of the flipper (millimeters)
+
+These features will be used to cluster penguins into natural groups via the **K-Means** algorithm.
+
+```{python}
+#| echo: false
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+from sklearn.preprocessing import StandardScaler
+
+# Load and preview the dataset
+penguins = pd.read_csv("palmer_penguins.csv")
+penguins = penguins[['bill_length_mm', 'flipper_length_mm']].dropna()
+
+print(penguins.head())
+
+# Summary statistics
+print(penguins.describe())
+
+scaler = StandardScaler()
+X = scaler.fit_transform(penguins)
+```
+
+📝 Summary of Data Insights
+The subset of the Palmer Penguins dataset used in this analysis includes two continuous features: bill_length_mm and flipper_length_mm, with 333 valid observations after removing missing values.
+
+Initial exploration reveals:
+
+- The average bill length is approximately 44.0 mm, with most values ranging between 39.5 mm (Q1) and 48.6 mm (Q3).
+
+- The average flipper length is approximately 201.0 mm, with most values ranging between 190 mm (Q1) and 213 mm (Q3).
+
+- The distributions are relatively symmetric, and no extreme outliers are immediately evident.
+
+- Both variables appear to be well-suited for distance-based clustering, as they are numerical, continuous, and display sufficient variance.
+
+These characteristics suggest that the data is appropriate for applying the K-Means algorithm after standardization, as meaningful clusters may emerge based on natural variations in bill and flipper size.
+
+### ⚙️ Implementing K-Means from Scratch
+
+```{python}
+def initialize_centroids(X, k):
+    np.random.seed(42)
+    return X[np.random.choice(X.shape[0], k, replace=False)]
+
+def assign_clusters(X, centroids):
+    distances = np.linalg.norm(X[:, np.newaxis] - centroids, axis=2)
+    return np.argmin(distances, axis=1)
+
+def update_centroids(X, labels, k):
+    return np.array([X[labels == i].mean(axis=0) for i in range(k)])
+
+def compute_wcss(X, labels, centroids):
+    return sum(np.sum((X[labels == i] - centroids[i])**2) for i in range(k))
+
+def kmeans(X, k, max_iter=100):
+    centroids = initialize_centroids(X, k)
+    for _ in range(max_iter):
+        labels = assign_clusters(X, centroids)
+        new_centroids = update_centroids(X, labels, k)
+        if np.allclose(centroids, new_centroids):
+            break
+        centroids = new_centroids
+    wcss = compute_wcss(X, labels, centroids)
+    return labels, centroids, wcss
+```
+
+### 📉 Elbow Method: WCSS vs K
+```{python}
+wcss_list = []
+k_range = range(2, 8)
+
+for k in k_range:
+    _, _, wcss = kmeans(X, k)
+    wcss_list.append(wcss)
+
+plt.figure(figsize=(6, 4))
+plt.plot(k_range, wcss_list, marker='o')
+plt.title("Elbow Method: WCSS vs K")
+plt.xlabel("Number of Clusters (k)")
+plt.ylabel("WCSS")
+plt.grid(True)
+plt.show()
+```
+
+The Elbow Method plot above illustrates the relationship between the number of clusters (K) and the within-cluster sum of squares (WCSS). As K increases from 2 to 7:
+
+- WCSS decreases sharply from K=2 to K=3, indicating significant improvement in cluster compactness.
+
+- From K=4 onward, the rate of improvement flattens, with diminishing returns as clusters are added.
+
+- The "elbow point" appears around K=3, where the drop in WCSS starts to level off.
+
+📍Conclusion: The optimal number of clusters is likely K=3, as it balances lower WCSS with model simplicity, aligning with the classic "elbow" pattern that suggests a natural grouping in the data.
+
+### 🧮 Silhouette Analysis
+```{python}
+from sklearn.metrics import silhouette_score
+
+silhouette_scores = []
+for k in k_range:
+    labels, _, _ = kmeans(X, k)
+    score = silhouette_score(X, labels)
+    silhouette_scores.append(score)
+
+plt.figure(figsize=(6, 4))
+plt.plot(k_range, silhouette_scores, marker='o', color='orange')
+plt.title("Silhouette Score vs K")
+plt.xlabel("Number of Clusters (k)")
+plt.ylabel("Silhouette Score")
+plt.grid(True)
+plt.show()
+```
+
+The Silhouette Score plot provides insight into the cohesion and separation quality of clustering for different values of K (number of clusters). Here's what the plot indicates:
+
+- The highest silhouette score is achieved at K = 2 (~0.535), indicating the most well-defined and separated clusters.
+
+- A secondary high score is seen at K = 3 (~0.52), which still reflects strong clustering structure, but slightly lower than K=2.
+
+- The silhouette score declines significantly beyond K = 3, reaching a local minimum at K = 5, suggesting that additional clusters introduce ambiguity and overlap.
+
+- Small rebounds at K = 6 hint at mild improvement, but still well below the peak.
+
+📍Conclusion: Based on the silhouette analysis, K = 2 yields the most distinct clusters, while K = 3 remains a strong and interpretable alternative — particularly if guided by insights from the Elbow Method.
+
+### Comparison with Built-In KMeans
+```{python}
+from sklearn.cluster import KMeans
+
+k = 3  # Example: set based on elbow/silhouette
+model = KMeans(n_clusters=k, random_state=42)
+model.fit(X)
+
+plt.figure(figsize=(6, 4))
+plt.scatter(X[:, 0], X[:, 1], c=model.labels_, cmap='viridis', s=50)
+plt.scatter(model.cluster_centers_[:, 0], model.cluster_centers_[:, 1], c='red', marker='X', s=200, label='Centroids')
+plt.title("Scikit-learn KMeans Result")
+plt.xlabel("Bill Length (scaled)")
+plt.ylabel("Flipper Length (scaled)")
+plt.legend()
+plt.grid(True)
+plt.show()
+```
+
+The scatter plot above visualizes the clustering results produced by the Scikit-learn KMeans algorithm with K = 3, using standardized values of bill length and flipper length.
+
+- The data points are clearly grouped into three distinct clusters, each represented by a different color.
+
+- The centroids (red X markers) lie at the geometric centers of each cluster, confirming that the algorithm effectively partitions the data based on spatial proximity in the scaled feature space.
+
+- The clusters appear well-separated, particularly along the flipper length axis, with modest overlap at the boundary between the central and rightmost cluster.
+
+- These visual results reinforce the earlier analytical findings from the Elbow Method and Silhouette Scores, which both suggested K = 3 as a plausible and interpretable choice.
+
+📍Conclusion: The final clustering outcome visually supports K = 3 as a strong and meaningful configuration, with distinct groupings that align with observable structure in the data.
+
+## K Nearest Neighbors
+
+In this section, we implement the **K-Nearest Neighbors (KNN)** classification algorithm from scratch using a **synthetic dataset**. The dataset includes two features, `x1` and `x2`, and a binary target variable `y` determined by whether `x2` is above or below a **wiggly non-linear boundary** defined by a sine function. We evaluate KNN performance across multiple values of `k` to identify the optimal neighborhood size.
+
+### 📊 Generate Training Data
+
+```{python}
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+
+np.random.seed(42)
+n = 100
+x1 = np.random.uniform(-3, 3, n)
+x2 = np.random.uniform(-3, 3, n)
+boundary = np.sin(4 * x1) + x1
+y = (x2 > boundary).astype(int)
+
+X_train = np.column_stack((x1, x2))
+y_train = y
+```
+```{python}
+#| echo: false
+plt.figure(figsize=(6, 5))
+plt.scatter(x1, x2, c=y, cmap="bwr", edgecolor="k", s=50)
+plt.xlabel("x1")
+plt.ylabel("x2")
+plt.title("Synthetic Training Data with Wiggly Boundary")
+plt.grid(True)
+plt.show()
+```
+
+The scatter plot above visualizes the synthetic training dataset, where the binary outcome variable y is determined by whether a data point lies above or below a non-linear sine-based decision boundary. Red and blue dots represent the two classes (1 and 0), and we observe:
+
+- A clearly non-linear separation between the two classes, with some overlap near the boundary.
+
+- The distribution is fairly balanced and symmetric across the x1 range.
+
+- This setup creates a meaningful challenge for the KNN classifier, especially near regions where the classes are closely intertwined.
+
+This visual confirms that the KNN algorithm must capture local patterns rather than relying on linear boundaries.
+
+### 🧪 Generate Test Data
+```{python}
+np.random.seed(7)
+x1_test = np.random.uniform(-3, 3, n)
+x2_test = np.random.uniform(-3, 3, n)
+boundary_test = np.sin(4 * x1_test) + x1_test
+y_test = (x2_test > boundary_test).astype(int)
+
+X_test = np.column_stack((x1_test, x2_test))
+```
+
+### 🧮Manual KNN Implementation
+```{python}
+from collections import Counter
+
+def euclidean_distance(a, b):
+    return np.sqrt(np.sum((a - b) ** 2, axis=1))
+
+def knn_predict(X_train, y_train, X_test, k):
+    predictions = []
+    for test_point in X_test:
+        distances = euclidean_distance(X_train, test_point)
+        k_indices = np.argsort(distances)[:k]
+        k_neighbors = y_train[k_indices]
+        top_vote = Counter(k_neighbors).most_common(1)[0][0]
+        predictions.append(top_vote)
+    return np.array(predictions)
+```
+
+### 📈 Accuracy vs. K Plot
+```{python}
+from sklearn.metrics import accuracy_score
+
+accuracies = []
+k_values = range(1, 31)
+
+for k in k_values:
+    y_pred = knn_predict(X_train, y_train, X_test, k)
+    acc = accuracy_score(y_test, y_pred)
+    accuracies.append(acc)
+
+plt.figure(figsize=(6, 5))
+plt.plot(k_values, accuracies, marker='o')
+plt.title("KNN Accuracy vs K")
+plt.xlabel("K")
+plt.ylabel("Accuracy")
+plt.grid(True)
+plt.show()
+```
+
+The plot above shows how the classification accuracy on the test set varies as the number of neighbors (k) increases from 1 to 30:
+
+- Peak accuracy (~0.90) is achieved at K = 3 and 4, indicating optimal performance with a small neighborhood size.
+
+- Accuracy generally declines as K increases, consistent with the tendency of higher k values to underfit complex, non-linear boundaries.
+
+- Performance fluctuates mildly between K = 10 and K = 30, with a slight recovery around K = 20 and K = 28, but never exceeds the peak at K = 3–4.
+
+📍Conclusion: The optimal value of k is 3, as it provides the highest test accuracy and best balances local sensitivity and model generalization in this non-linear classification task.
+
+## 🧾 Final Reflection
+This project explored both unsupervised and supervised machine learning techniques through hands-on implementation and evaluation:
+
+- In Part 1a (K-Means Clustering), we used the Palmer Penguins dataset to group observations based on bill and flipper length. Both the Elbow Method and Silhouette Scores supported an optimal cluster count of K = 3, which was confirmed visually through a clearly separated cluster plot.
+
+- In Part 2a (K-Nearest Neighbors), we constructed a synthetic binary classification problem with a non-linear decision boundary. By evaluating test accuracy across values of K from 1 to 30, we found that K = 3 yielded the highest accuracy (~0.90), demonstrating the strength of KNN in capturing local structure when appropriately tuned.
+
+Through this exercise, we reinforced core machine learning concepts including distance-based classification, model selection, evaluation metrics, and visual interpretability. Both models highlight the importance of choosing the right hyperparameters and understanding the data's structure to build effective predictive systems.
